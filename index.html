@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Phonetic Alphabet Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,700" rel="stylesheet">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <style media="screen">
+      * {
+        font-family: 'Ubuntu', sans-serif;
+      }
+      html {
+        margin: 0;
+        height: 100%;
+      }
+      body {
+        background: rgba(0,0,0,0.02);
+        margin: 0;
+        height: 100%;
+      }
+      .master-wrap {
+        position: relative;
+      }
+      .header-section {
+        text-align: center;
+        background: radial-gradient(at bottom,#3fd5ff,#1ea8ce);
+        padding: 50px;
+      }
+      .hero-title {
+        color: white;
+        font-weight: 300;
+        font-size: 48px;
+        padding-top: 50px;
+      }
+      .key-input-wrapper {
+        display: inline-block;
+        background: linear-gradient(to right, rgba(255, 255, 255, .5), rgba(255, 255, 255, .2), rgba(255, 255, 255, 0.5));
+        border-radius: 50px;
+        padding: 6px;
+        width: 100%;
+        max-width: 450px;
+        position: relative;
+        z-index: 1;
+      }
+      #key-input {
+        padding: 15px 10px;
+        border: none;
+        border-radius: 50px;
+        width: 100%;
+        text-align: center;
+        font-size: 20px;
+        box-shadow: 4px 4px 10px rgba(0,0,0,0.1);
+        transition: box-shadow 0.25s ease-in-out;
+        box-sizing: border-box;
+      }
+      #key-input:focus {
+        outline: 0;
+        box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
+      }
+      #key-input::placeholder {
+        color: #d6d6d6;
+        box-sizing: border-box;
+      }
+      #main-content {
+        text-align: center;
+        padding: 50px 0px 100px 0px;
+      }
+      .letter-row {
+        margin: 0px auto 20px auto;
+        padding: 20px 30px;
+        display: table;
+        box-sizing: border-box;
+        border-radius: 10px;
+        box-shadow: 0px 10px 20px rgba(0,0,0,0.06);
+        background: #ffffff;
+        position: relative;
+        z-index: 1;
+        border: 2px solid rgba(0,0,0,0.2);
+      }
+      .letter-row:last-of-type {
+        margin-bottom: 150px;
+      }
+      .letter-column {
+        display: table-cell;
+        vertical-align: middle;
+        width: 70px;
+      }
+      .letter-wrapper {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: #eee;
+        text-align: center;
+        position: relative;
+        margin-right: 30px;
+      }
+      .letter {
+        font-size: 24px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .word-column {
+        display: table-cell;
+        vertical-align: middle;
+        font-size: 24px;
+        text-align: left;
+      }
+      .word {
+        display: inline-block;
+      }
+      #vertical-line {
+        width: 5px;
+        background: rgba(0, 0, 0, 0.2);
+        margin: -60px auto 0px auto;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 0;
+        height: 0px;
+        transition: height 0.5s ease-in-out;
+      }
+      .alphabets {
+        margin-bottom: 20px;
+      }
+      .alphabet {
+        cursor: pointer;
+        font-size: 12px;
+        background: rgba(255,255,255,0);
+        border: 2px solid rgba(255,255,255,1);
+        border-radius: 50px;
+        padding: 6px 12px;
+        white-space: nowrap;
+        color: gray;
+        display: inline-block;
+        margin: 10px;
+        transition: background 0.25s ease-in-out;
+        color: #ffffff;
+      }
+      .alphabet:hover {
+        background: rgba(255,255,255,0.25);
+      }
+      .selected-alphabet {
+        background: rgba(255,255,255,1);
+        color: #3fd5ff;
+      }
+      .selected-alphabet:hover {
+        background: rgba(255,255,255,1);
+        color: #3fd5ff;
+      }
+      .selected-alphabet:before {
+        content: "✔";
+        float: left;
+        margin-right: 10px;
+      }
+    </style>
+</head>
+
+<body>
+
+  <div class="master-wrap">
+    <div class="header-section">
+      <h1 class="hero-title">Phonetic Alphabet Generator</h1>
+      <div class="alphabets">
+        <div id="standard" class="alphabet selected-alphabet" onclick="changeAlphabet(this.id)">
+          Standard
+        </div><div id="alternate" class="alphabet" onclick="changeAlphabet(this.id)">
+          Alternate
+        </div><div id="random" class="alphabet" onclick="changeAlphabet(this.id)">
+          Random
+        </div>
+      </div>
+      <div class="key-input-wrapper">
+        <input id="key-input" type="text" placeholder="Paste your confirmation code / license key" oninput="generateRows(this.value)">
+      </div>
+    </div>
+    <div id="vertical-line"></div>
+    <div id="main-content"></div>
+  </div>
+
+  <script src="script.js" charset="utf-8"></script>
+
+</body>
+
+</html>
